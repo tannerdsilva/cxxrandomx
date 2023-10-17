@@ -65,6 +65,7 @@ void runTest(const char* name, bool condition, FUNC f) {
 }
 
 int main() {
+
 	char testHash[32];
 
 	//std::cout << "Allocating randomx_cache..." << std::endl;

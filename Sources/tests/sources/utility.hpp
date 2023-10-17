@@ -1,1 +1,0 @@
-../../../RandomX/src/tests/utility.hpp

@@ -308,13 +308,19 @@ int main(int argc, char** argv) {
 		if (cache == nullptr) {
 			throw CacheAllocException();
 		}
+		std::cout << "Cache allocated in " << sw.getElapsed() << " s" << std::endl;
 		randomx_init_cache(cache, &seed, sizeof(seed));
+		sw.restart();
+		std::cout << "Cache initialized in " << sw.getElapsed() << " s" << std::endl;
 		if (miningMode) {
 			dataset = randomx_alloc_dataset(flags);
 			if (dataset == nullptr) {
+				std::cout << "Dataset allocation failed" << std::endl;
 				throw DatasetAllocException();
 			}
+			std::cout << "Dataset allocated in " << sw.getElapsed() << " s" << std::endl;
 			uint32_t datasetItemCount = randomx_dataset_item_count();
+			std::cout << "Initializing " << initThreadCount << " dataset item(s) ..." << std::endl;
 			if (initThreadCount > 1) {
 				auto perThread = datasetItemCount / initThreadCount;
 				auto remainder = datasetItemCount % initThreadCount;
@@ -331,6 +337,7 @@ int main(int argc, char** argv) {
 			else {
 				randomx_init_dataset(dataset, cache, 0, datasetItemCount);
 			}
+			std::cout << "Dataset initialized in " << sw.getElapsed() << " s" << std::endl;
 			randomx_release_cache(cache);
 			cache = nullptr;
 			threads.clear();

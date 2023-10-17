@@ -1,0 +1,1 @@
+../../RandomX/src/argon2_avx2.c

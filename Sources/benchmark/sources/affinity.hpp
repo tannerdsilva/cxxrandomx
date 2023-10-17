@@ -1,0 +1,1 @@
+../../../RandomX/src/tests/affinity.hpp
